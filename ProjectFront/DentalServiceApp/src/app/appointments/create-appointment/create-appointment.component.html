@@ -1,0 +1,70 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3">
+        <div class="box-register" id="form" style="max-width:300px;">
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+            <div class="form-group" *ngIf="isPatient">
+              <label for="dentist">Pick a dentist</label>
+              <select name="value" id="dentist" class="form-control"
+                [(ngModel)]="form.dentist" #dentist="ngModel" required>
+                <option *ngFor="let dentist of dentists" [value]="dentist.userId">{{ dentist.firstname + " " + dentist.lastname }}</option>
+              </select>
+              <div *ngIf="f.submitted && dentist.invalid">
+                <div class="text-danger" *ngIf="dentist.errors.required">Dentist is required.</div>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="isDentist">
+              <label for="patient">Pick a patient</label>
+              <select name="value" id="patient" class="form-control"
+                [(ngModel)]="form.patient" #patient="ngModel" required>
+                <option *ngFor="let patient of patients" [value]="patient.userId">{{ patient.firstname + " " + patient.lastname }}</option>
+              </select>
+              <div *ngIf="f.submitted && patient.invalid">
+                <div class="text-danger" *ngIf="patient.errors.required">Dentist is required.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="service">Pick a dental service</label>
+              <select name="value" id="service" class="form-control"
+                      [(ngModel)]="form.serviceId" #service="ngModel" required>
+                <option *ngFor="let service of dentalServices" [value]="service.serviceId">{{ service.description + ' ' + service.price + ' zł'}}</option>
+              </select>
+              <div *ngIf="f.submitted && service.invalid">
+                <div class="text-danger" *ngIf="service.errors.required">Dental service is required.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="clientDesc">Your comment (Optional)</label>
+              <input type="text" class="form-control" id="clientDesc" name="clientDesc" [(ngModel)]="form.clientDescription"
+                     #comment="ngModel" maxlength="30"/>
+              <div *ngIf="f.submitted && comment.invalid">
+                <div class="text-danger" *ngIf="comment.errors.maxlength">Comment can be maximum 30 chars.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="time">Pick a date and time</label>
+              <input class="form-control" type="datetime-local" id="time" name="meeting-time" [(ngModel)]="form.time"
+                     min="2021-01-01T09:00" max="2024-12-31T17:00" #time="ngModel" required>
+              <div *ngIf="f.submitted && time.invalid">
+                <div class="text-danger" *ngIf="time.errors.required">Time is required.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary">Book</button>
+              <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+                Signup failed!<br/>{{errorMessage}}
+              </div>
+              <div *ngIf="f.submitted && isSignedUp" class="alert alert-warning">
+                Appointment booked successfully<br/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

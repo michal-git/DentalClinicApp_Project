@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="main-body">
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Full Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{accountInfo.firstname}} {{accountInfo.lastname}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Email</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{accountInfo.email}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Phone</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{accountInfo.phone}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="btn btn-info" (click)="onEdit()">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="isEditing">
+  <div class="main-body">
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <form name="form" (ngSubmit)="f.form.valid && onConfirm()" #f="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input style="max-width:200px;" type="text" pattern="[1-9][0-9]{8}"
+                       class="form-control" name="phone" [(ngModel)]="form.phone" #phone="ngModel"
+                       required maxlength="9" minlength="9" value="{{accountInfo.phone}}"/>
+                <div *ngIf="f.submitted && phone.invalid">
+                  <div class="text-danger" *ngIf="phone.errors.required">Phone is required</div>
+                  <div class="text-danger" *ngIf="phone.errors.minlength">Phone must contain 9 digits.</div>
+                  <div class="text-danger" *ngIf="phone.errors.maxlength">Phone must contain 9 digits.</div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <button class="btn btn-info">Confirm</button>
+                <a class="btn btn-link" (click)="onCancel()">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

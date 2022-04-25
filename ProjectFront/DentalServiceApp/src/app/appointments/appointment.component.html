@@ -1,0 +1,9 @@
+<div class="form-group" id="buttons" *ngIf="(isPatient || isDentist)">
+  <button class="btn btn-primary" (click)="onAdd()">Book New Appointment</button>
+  <button class="btn btn-link" *ngIf="isCreating" (click)="onCancel()">Cancel</button>
+</div>
+<div *ngIf="(isPatient || isDentist)">
+<app-my-appointment-list *ngIf="!isCreating"></app-my-appointment-list>
+<app-create-appointment *ngIf="isCreating"></app-create-appointment>
+</div>
+<app-dentist-appointments-list *ngIf="isAdmin"></app-dentist-appointments-list>

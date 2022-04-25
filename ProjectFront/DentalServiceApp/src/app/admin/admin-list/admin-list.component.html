@@ -1,0 +1,82 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container" *ngIf="isEditing">
+  <div class="main-body">
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <form name="form" (ngSubmit)="f.form.valid && onConfirm()" #f="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input style="max-width:200px;" type="text" pattern="[1-9][0-9]{8}"
+                       class="form-control" name="phone" [(ngModel)]="form.phone" #phone="ngModel"
+                       required maxlength="9" minlength="9"/>
+                <div *ngIf="f.submitted && phone.invalid">
+                  <div class="text-danger" *ngIf="phone.errors.required">Phone is required</div>
+                  <div class="text-danger" *ngIf="phone.errors.minlength">Phone must contain 9 digits.</div>
+                  <div class="text-danger" *ngIf="phone.errors.maxlength">Phone must contain 9 digits.</div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <button class="btn btn-info">Confirm</button>
+                <a class="btn btn-link" (click)="onCancel()">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-uppercase mb-0">List of Admins</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table no-wrap user-table mb-0">
+            <thead>
+            <tr>
+              <th scope="col" class="border-0 text-uppercase font-medium pl-4">Id</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Phone</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Active</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let admin of admins">
+              <td class="pl-4">{{admin.userId}}</td>
+              <td>
+                <h5 class="font-medium mb-0">{{admin.firstname}} {{admin.lastname}}</h5>
+              </td>
+              <td>
+                <span class="text-muted">{{admin.email}}</span><br>
+              </td>
+              <td>
+                <span class="text-muted"> {{admin.phone}} </span>
+              </td>
+              <td>
+                <span class="text-muted"> {{!admin.locked}} </span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" title="Edit" (click)="getOne(admin.userId)"><i class="fa fa-edit"></i> </button>
+                <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" id="button-trash" title="delete - Set Active to false" (click)="setBlocked(admin.userId)"><i class="fa fa-trash"></i> </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

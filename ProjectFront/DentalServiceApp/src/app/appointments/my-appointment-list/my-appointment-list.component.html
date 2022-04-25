@@ -1,0 +1,52 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-uppercase mb-0">My Appointments</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table no-wrap user-table mb-0">
+            <thead>
+            <tr>
+              <th scope="col" class="border-0 text-uppercase font-medium">Date</th>
+              <th *ngIf="isPatient" scope="col" class="border-0 text-uppercase font-medium">Dentist</th>
+              <th *ngIf="isDentist" scope="col" class="border-0 text-uppercase font-medium">Patient</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Service</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Your comment</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Status</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let myApp of myAppointments">
+              <td class="font-medium mb-0">{{myApp.appointmentDate}}</td>
+              <td *ngIf="isPatient">
+                <span class="text-muted">{{myApp.dentist.firstname}} {{myApp.dentist.lastname}}</span>
+              </td>
+              <td *ngIf="isDentist">
+                <span class="text-muted">{{myApp.patient.firstname}} {{myApp.patient.lastname}}</span>
+              </td>
+              <td>
+                <span class="text-muted">{{myApp.service.description}}</span><br>
+              </td>
+              <td>
+                <span class="text-muted">{{myApp.clientDescription}}</span><br>
+              </td>
+              <td>
+                <span class="text-muted"> {{myApp.status}} </span>
+              </td>
+              <td>
+                <button *ngIf="isPatient" type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" title="Edit"><i class="fa fa-edit"></i> </button>
+                <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" id="button-trash" title="Delete" (click)="onTrash(myApp.appId)"><i class="fa fa-trash"></i> </button>
+                <button *ngIf="isDentist" type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" id="done" title="Appointment done" (click)="onDone(myApp.appId)"><i>Done</i> </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

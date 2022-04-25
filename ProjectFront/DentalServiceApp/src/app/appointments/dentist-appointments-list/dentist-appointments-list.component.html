@@ -1,0 +1,71 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="form-group" id="form">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="form-group">
+      <label for="dentist">Pick a dentist</label>
+      <select name="value" id="dentist" class="form-control"
+              [(ngModel)]="form.dentist" required>
+        <option *ngFor="let dentist of dentists" [value]="dentist.userId">{{ dentist.firstname + " " + dentist.lastname }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Search</button>
+    </div>
+  </form>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-uppercase mb-0">{{pickedDentist.firstname}} {{pickedDentist.lastname}} Appointments</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table no-wrap user-table mb-0">
+            <thead>
+            <tr>
+              <th scope="col" class="border-0 text-uppercase font-medium">Date</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Dentist</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Dentist comment</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Service</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Patient</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Your comment</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Status</th>
+              <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let app of dentistAppointments">
+              <td class="font-medium mb-0">{{app.appointmentDate}}</td>
+              <td>
+                <span class="text-muted">{{app.dentist.firstname}} {{app.dentist.lastname}}</span>
+              </td>
+              <td>
+                <span class="text-muted">{{app.dentistDescription}}</span><br>
+              </td>
+              <td>
+                <span class="text-muted">{{app.service.description}}</span><br>
+              </td>
+              <td>
+                <span class="text-muted">{{app.patient.firstname}} {{app.patient.lastname}}</span>
+              </td>
+              <td>
+                <span class="text-muted">{{app.clientDescription}}</span><br>
+              </td>
+              <td>
+                <span class="text-muted"> {{app.status}} </span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" title="Edit"><i class="fa fa-edit"></i> </button>
+                <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2" id="button-trash" title="Delete" (click)="onTrash(app.appId)"><i class="fa fa-trash"></i> </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+#form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#button-trash:hover {
+  background-color: #ed5e68;
+}

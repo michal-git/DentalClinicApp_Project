@@ -1,0 +1,7 @@
+<div class="form-group" id="buttons">
+  <button class="btn btn-primary" (click)="onAdd()">Add New Admin</button>
+  <button class="btn btn-link" *ngIf="isAdding" (click)="onCancel()">Cancel</button>
+</div>
+<app-add-admin *ngIf="isAdding"></app-add-admin>
+<app-admin-list *ngIf="!isAdding"></app-admin-list>
+

@@ -1,0 +1,6 @@
+<div class="form-group" id="buttons" *ngIf="isAdmin">
+  <button class="btn btn-primary" (click)="onAdd()">Add New Dentist</button>
+  <button class="btn btn-link" *ngIf="isAdding" (click)="onCancel()">Cancel</button>
+</div>
+<app-add-dentist *ngIf="isAdding"></app-add-dentist>
+<app-dentist-list *ngIf="!isAdding"></app-dentist-list>

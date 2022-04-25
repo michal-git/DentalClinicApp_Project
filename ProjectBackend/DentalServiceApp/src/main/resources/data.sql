@@ -1,0 +1,12 @@
+DELETE FROM role;
+INSERT INTO role (name) VALUES ('ADMIN');
+INSERT INTO role (name) VALUES ('DENTIST');
+INSERT INTO role (name) VALUES ('PATIENT');
+INSERT INTO users (email, enabled, firstname, lastname, locked, password, phone) VALUES ('admin@gmail.com', TRUE , 'Admin', 'Adminowy', FALSE, '$2y$12$b4XFPMQKHAN9EdQ0dFazke6Qhlb5Gs1hpWp0tsSHJ7t6.GL7vgRgq', '542900876');
+INSERT INTO users_roles (user_user_id, roles_role_id) VALUES (1, 1);
+INSERT INTO users (email, enabled, firstname, lastname, locked, password, phone) VALUES ('dentist@gmail.com', TRUE , 'Dentysta', 'Zabek', FALSE, '$2y$12$b4XFPMQKHAN9EdQ0dFazke6Qhlb5Gs1hpWp0tsSHJ7t6.GL7vgRgq', '987093426');
+INSERT INTO users_roles (user_user_id, roles_role_id) VALUES (2, 2);
+INSERT INTO users (email, enabled, firstname, lastname, locked, password, phone) VALUES ('mumu.cisek@gmail.com', TRUE , 'Michał', 'Cisło', FALSE, '$2y$12$b4XFPMQKHAN9EdQ0dFazke6Qhlb5Gs1hpWp0tsSHJ7t6.GL7vgRgq', '678900876');
+INSERT INTO users_roles (user_user_id, roles_role_id) VALUES (3, 3);
+INSERT INTO users (email, enabled, firstname, lastname, locked, password, phone) VALUES ('mama@gmail.com', TRUE , 'Magda', 'Cisło', FALSE, '$2y$12$b4XFPMQKHAN9EdQ0dFazke6Qhlb5Gs1hpWp0tsSHJ7t6.GL7vgRgq', '287563756');
+INSERT INTO users_roles (user_user_id, roles_role_id) VALUES (4, 3);

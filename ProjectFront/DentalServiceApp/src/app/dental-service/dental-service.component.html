@@ -1,0 +1,31 @@
+<div *ngIf="isAdmin">
+  <div class="form-group" id="form">
+    <form class="form-inline" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Name</span>
+        </div>
+        <input type="text" class="form-control" name="description" aria-label="Default" [(ngModel)]="form.description" #description="ngModel"
+               aria-describedby="inputGroup-sizing-default" placeholder="Description" required>
+        <div *ngIf="f.submitted && description.invalid">
+          <div class="text-danger" *ngIf="description.errors.required">Name is required</div>
+        </div>
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Price</span>
+        </div>
+        <input type="number" class="form-control" name="price" aria-label="Default" [(ngModel)]="form.price" #price="ngModel"
+               placeholder="99.99" required />
+        <div *ngIf="f.submitted && price.invalid">
+          <div class="text-danger" *ngIf="price.errors.required">Price is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary mb-2">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-dental-service-list></app-dental-service-list>
